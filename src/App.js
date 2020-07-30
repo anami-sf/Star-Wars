@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
+  const [character, setCharacter] = useState({});
+  const [vehicle, setVehicles] = useState({});
+
+  async function fetchCharacterData() {
+    let characterData = await fetch("https://swapi.dev/api/people/1/");
+    characterData = await characterData.json();
+    setCharacter(characterData);
+    let vehicleData = await fetch(characterData.vehicles[0]);
+    setVehicles(await vehicleData.json());
+  }
+
+  useEffect(() => {
+    fetchCharacterData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>{character.name}</div>
+      <div>{vehicle.name}</div>
+    </>
   );
 }
 
