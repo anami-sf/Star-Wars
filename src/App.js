@@ -8,7 +8,7 @@ function App() {
   async function fetchCharacterData() {
     let characterData = await fetch("https://swapi.dev/api/people/1/");
     characterData = await characterData.json();
-    setCharacter(await characterData);
+    setCharacter(characterData);
     let vehicleData = await fetch(characterData.vehicles[0]);
     setVehicles(await vehicleData.json());
   }
