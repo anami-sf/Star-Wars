@@ -3,15 +3,14 @@ import "./App.css";
 
 function App() {
   const [character, setCharacter] = useState({});
-  const [vehicles, setVehicles] = useState({});
+  const [vehicle, setVehicles] = useState({});
 
   async function fetchCharacterData() {
-    const characterData = await fetch("https://swapi.dev/api/people/1/");
-    const vehicleData = await fetch(characterData.vehicles);
-    setCharacter(await characterData.json());
-    const car = await vehicleData.json();
-    console.log(car);
-    // setVehicles(await vehicleData.json());
+    let characterData = await fetch("https://swapi.dev/api/people/1/");
+    characterData = await characterData.json();
+    setCharacter(await characterData);
+    let vehicleData = await fetch(characterData.vehicles[0]);
+    setVehicles(await vehicleData.json());
   }
 
   useEffect(() => {
@@ -21,7 +20,7 @@ function App() {
   return (
     <>
       <div>{character.name}</div>
-      <div>{vehicles.name}</div>
+      <div>{vehicle.name}</div>
     </>
   );
 }
