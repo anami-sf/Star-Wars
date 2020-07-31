@@ -11,16 +11,20 @@ function App() {
   const [character, setCharacter] = useState({});
   const [vehicle, setVehicles] = useState({});
 
-  const fetchCharacterData = async () => {
-    let characterData = await swapi.get("/people/1/");
-    setCharacter(characterData.data);
-    let vehicleData = await swapi.get(characterData.data.vehicles[0]);
-    setVehicles(await vehicleData.data);
-  }
-
   useEffect(() => {
     fetchCharacterData();
   }, []);
+
+  const fetchCharacterData = async () => {
+    try {
+      let characterData = await swapi.get("/people/1/");
+      setCharacter(characterData.data);
+      let vehicleData = await swapi.get(characterData.data.vehicles[0]);
+      setVehicles(await vehicleData.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
