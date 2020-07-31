@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import "./App.css";
+
+const swapi = axios.create({
+  baseURL: "https://swapi.dev/api/"
+});
 
 function App() {
   const [character, setCharacter] = useState({});
   const [vehicle, setVehicles] = useState({});
 
-  async function fetchCharacterData() {
-    let characterData = await fetch("https://swapi.dev/api/people/1/");
-    characterData = await characterData.json();
-    setCharacter(characterData);
-    let vehicleData = await fetch(characterData.vehicles[0]);
-    setVehicles(await vehicleData.json());
+  const fetchCharacterData = async () => {
+    let characterData = await swapi.get("/people/1/");
+    setCharacter(characterData.data);
+    let vehicleData = await swapi.get(characterData.data.vehicles[0]);
+    setVehicles(await vehicleData.data);
   }
 
   useEffect(() => {
