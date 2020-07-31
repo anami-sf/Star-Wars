@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Particles from "react-particles-js";
 
-import "./App.css";
+import "./App.scss";
 
 const swapi = axios.create({
   baseURL: "https://swapi.dev/api/"
@@ -29,13 +29,13 @@ function App() {
 
   return (
     <>
-      <div style={{ backgroundColor: "#000000", position: "absolute", zIndex: "-1" }}>
+      <div style={{ backgroundColor: "#000000", position: "absolute", zIndex: "-1", width: "100%", height: "100%" }}>
         <Particles
           params={{
             particles: {
               color: "rgba(255, 255, 0, 1)",
               number: {
-                value: 40,
+                value: 60,
                 density: {
                   enable: false
                 }
