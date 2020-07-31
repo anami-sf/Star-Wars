@@ -69,6 +69,7 @@ function App() {
           }}
         />
       </div>
+      <nav class="nav">STAR WARS</nav>
       <div>{character.name}</div>
       <div>{vehicle.name}</div>
     </>
