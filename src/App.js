@@ -1,79 +1,49 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Particles from "react-particles-js";
+import React, { useState, useEffect } from "react"
+import axios from "axios"
+import Stars from "./components/Stars"
+import Cards from "./components/Cards"
+import Navbar from "./components/Navbar"
+import Spinner from 'react-bootstrap/Spinner'
 
-import "./App.scss";
+import "./App.scss"
 
 const swapi = axios.create({
   baseURL: "https://swapi.dev/api/"
 });
 
 function App() {
-  const [character, setCharacter] = useState({});
-  const [vehicle, setVehicles] = useState({});
+  const [character, setCharacter] = useState([])
+  const [vehicle, setVehicles] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    fetchCharacterData();
+    fetchCharacterData()
   }, []);
 
   const fetchCharacterData = async () => {
     try {
-      let characterData = await swapi.get("/people/1/");
-      setCharacter(characterData.data);
-      let vehicleData = await swapi.get(characterData.data.vehicles[0]);
-      setVehicles(await vehicleData.data);
+      setIsLoading(true);
+      let characterData = await swapi.get("/people/")
+      setCharacter(characterData.data.results)
+      //let vehicleData = await swapi.get(characterData.data.vehicles[0])
+      //setVehicles(await vehicleData.data)
+      setIsLoading(false)
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
   };
 
   return (
     <>
-      <div style={{ backgroundColor: "#000000", position: "absolute", zIndex: "-1", width: "100%", height: "100%" }}>
-        <Particles
-          params={{
-            particles: {
-              color: "rgba(255, 255, 0, 1)",
-              number: {
-                value: 60,
-                density: {
-                  enable: false
-                }
-              },
-              size: {
-                value: 3,
-                random: true
-              },
-              move: {
-                direction: "top",
-                out_mode: "out",
-                straight: "true"
-              },
-              line_linked: {
-                enable: false
-              }
-            },
-            interactivity: {
-              events: {
-                onclick: {
-                  enable: true,
-                  mode: "remove"
-                }
-              },
-              modes: {
-                remove: {
-                  particles_nb: 10
-                }
-              }
-            }
-          }}
-        />
+      <Stars />
+      <Navbar />
+      {isLoading ? (
+        <div class="spinner"><Spinner animation="grow" variant="warning" /></div>
+      ) : (
+      <div className="cards">
+        {character.map((item, i) => <Cards key={i} item={item}/>)}
       </div>
-      <nav class="nav">STAR WARS</nav>
-      <section style={{ backgroundColor: "white" }}>
-        <div>{character.name}</div>
-        <div>{vehicle.name}</div>
-      </section>
+      )}
     </>
   );
 }

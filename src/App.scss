@@ -1,13 +1,90 @@
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Red+Rose:wght@300&family=Roboto:wght@500;700&display=swap');
+
+$card-dark-color: #222826;
+$card-color: #908f95;
+$space-font: fantasy;
+
 .App {
   text-align: center;
 }
 
+
 .nav {
   display: flex;
   justify-content: center;
-  background-color: yellow;
   padding: 2%;
-  font-size: 25px;
+  font-size: 2rem;
   font-weight: 700;
   letter-spacing: 3px;
+  color: gold;
+  text-align: center;
+}
+
+.sub {
+  font-size: 0.85rem;
+}
+
+.particles {
+  background-color: #000000; 
+  position: fixed;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.cards {
+  display: grid;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 25px;
+  padding: 0px 20px;
+}
+
+.card {
+  background: $card-dark-color;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 15px 15px 20px -10px white;
+}
+
+.inner {
+  background:$card-color;
+  padding: 5px;
+}
+
+.info {
+  font-size: 0.85rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.name {
+  font-family: $space-font;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+.image img{
+  max-width: 100%;
+}
+
+.attributes {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.attributes div {
+  background: $card-dark-color;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  margin: 3px;
+  padding: 3px 8px;
+  color: #e7e8e0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.spinner {
+  text-align: center;
 }
