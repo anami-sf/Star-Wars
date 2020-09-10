@@ -5,6 +5,15 @@ $card-dark-color: #222826;
 $card-color: #908f95;
 $space-font: fantasy;
 
+button {
+  background: #908f95;
+  float: right;
+  font-family: fantasy;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 20px;
+}
+
 .App {
   text-align: center;
 }
@@ -36,7 +45,7 @@ $space-font: fantasy;
 .cards {
   display: grid;
   justify-content: space-evenly;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
   grid-gap: 25px;
   padding: 0px 20px;
 }
@@ -46,6 +55,7 @@ $space-font: fantasy;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 15px 15px 20px -10px white;
+  max-width: 250px;
 }
 
 .inner {
@@ -87,4 +97,12 @@ $space-font: fantasy;
 
 .spinner {
   text-align: center;
+}
+
+.next {
+  float: right;
+}
+
+.prev {
+  float: left;
 }
