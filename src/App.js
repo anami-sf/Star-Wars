@@ -12,7 +12,7 @@ const swapi = axios.create({
 });
 
 function App() {
-  const [character, setCharacter] = useState(JSON.parse(localStorage.getItem("initialCharacterData")) || [])
+  const [characters, setCharacters] = useState(JSON.parse(localStorage.getItem("initialCharacterData")) || [])
   const [vehicle, setVehicles] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [pageNum, setPageNum] = useState('people/?page=1')
@@ -25,12 +25,12 @@ function App() {
   }, [pageNum]);
 
   const fetchCharacterData = async () => {
-    if ((initialLoad && character.length === 0) || !initialLoad) {
+    if ((initialLoad && characters.length === 0) || !initialLoad) {
       try {
         setIsLoading(true);
         let characterData = await swapi.get(pageNum)
         localStorage.setItem("initialCharacterData", JSON.stringify(characterData.data.results))
-        setCharacter(characterData.data.results)
+        setCharacters(characterData.data.results)
         setPrevious(characterData.data.previous)
         setNext(characterData.data.next)
         //let vehicleData = await swapi.get(characterData.data.vehicles[0])
@@ -59,7 +59,7 @@ function App() {
         <div className="spinner"><Spinner animation="grow" variant="warning" /></div>
       ) : (
           <div className="cards">
-            {character.map((item, i) => <Cards key={i} item={item} />)}
+            {characters.map((character, i) => <Cards key={i} character={character}/>)}
           </div>
         )}
       <button className="prev" onClick={handlePrevious} style={{ display: previous && !isLoading ? "block" : "none" }}>Previous</button>

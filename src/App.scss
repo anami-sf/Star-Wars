@@ -18,16 +18,18 @@ button {
   text-align: center;
 }
 
-
 .nav {
   display: flex;
   justify-content: center;
-  padding: 2%;
-  font-size: 2rem;
+  padding: 1rem;
   font-weight: 700;
   letter-spacing: 3px;
   color: gold;
   text-align: center;
+}
+
+.logo {
+  width: 200px;
 }
 
 .sub {
